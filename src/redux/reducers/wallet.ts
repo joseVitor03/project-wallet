@@ -1,14 +1,22 @@
+import { AnyAction } from 'redux';
 import {
   CURRECIES_SEARCH_START,
   CURRECIES_SEARCH_SUCCESS,
   CURRECIES_SEARCH_ERROR,
+  WALLET_FORM_START,
+  WALLET_FORM_SUCCESS,
+  WALLET_FORM_ERROR,
+  WalletFormSuccessType,
 } from '../actions';
-import { WalletActionType } from '../../type';
+
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
 
-const INITIAL_STATE = {};
+const INITIAL_STATE = {
+  currencies: [],
+  expenses: [],
+};
 
-const wallet = (state = INITIAL_STATE, action: WalletActionType) => {
+const wallet = (state = INITIAL_STATE, action: AnyAction) => {
   switch (action.type) {
     case CURRECIES_SEARCH_START:
       return {
@@ -27,6 +35,23 @@ const wallet = (state = INITIAL_STATE, action: WalletActionType) => {
       return {
         ...state,
         errorMessage: 'Erro na Busca',
+      };
+      break;
+    case WALLET_FORM_START:
+      return {
+        ...state,
+        isFetchingWallet: true,
+      };
+      break;
+    case WALLET_FORM_SUCCESS:
+      return {
+        ...state,
+        expenses: [
+          ...state.expenses,
+          {
+            ...action.payload,
+          },
+        ],
       };
     default:
       return state;

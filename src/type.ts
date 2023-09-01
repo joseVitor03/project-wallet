@@ -27,18 +27,46 @@ export type CurreciesType = {
 export type GlobalState = {
   user: UserFormType,
   wallet: {
-    currencies: any[]
+    currencies: any[], // array de string
+    expenses: [], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
+    editor: false, // valor booleano que indica se uma despesa está sendo editada
+    idToEdit: 0,
   }
+};
+
+export type WalletFormSuccessType = {
+  id: number,
+  value: string,
+  description: string,
+  currency: string,
+  method: string,
+  tag: string,
+  exchangeRates: any,
 };
 
 export type WalletActionType = {
   type: string,
-  payload: CurreciesType,
+  payload: WalletFormSuccessType
+};
+
+export type WalletFormType = {
+  id: number,
+  value: string,
+  description: string,
+  currency: string,
+  method: string,
+  tag: string,
 };
 
 export type ReduxState = {
   isFetching: boolean,
-  currencies: string[]
+  user: UserFormType,
+  wallet: {
+    currencies: any[], // array de string
+    expenses: WalletFormSuccessType[], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
+    editor: false, // valor booleano que indica se uma despesa está sendo editada
+    idToEdit: 0,
+  }
 };
 
 export type Dispatch = ThunkDispatch<ReduxState, null, AnyAction>;
