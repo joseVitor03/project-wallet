@@ -5,7 +5,7 @@ import { curreciesAction, walletAction } from '../redux/actions';
 
 function WalletForm() {
   const INITIAL_STATE = {
-    id: 0,
+    // id: 0,
     value: '',
     description: '',
     currency: 'USD',
@@ -22,13 +22,14 @@ function WalletForm() {
     const { id, value } = event.target;
     setForm({
       ...form,
-      id: idExpense,
       [id]: value,
     });
   };
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
+    console.log(form);
+
     setForm(INITIAL_STATE);
     setIdExpense(idExpense + 1);
     dispatch(walletAction(form));

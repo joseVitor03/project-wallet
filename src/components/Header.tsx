@@ -9,8 +9,9 @@ type PropHeader = {
 function Header({ email }: PropHeader) {
   const [despesas, setDespesas] = useState<number>(0);
   const { expenses } = useSelector((state: ReduxState) => state.wallet);
+  const data = useSelector((state: ReduxState) => state);
 
-  console.log(expenses);
+  console.log(data);
 
   useEffect(() => {
     const totalDespesas: number = expenses.reduce((sum, valueCurr) => (

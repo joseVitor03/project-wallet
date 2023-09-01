@@ -50,7 +50,7 @@ export type WalletActionType = {
 };
 
 export type WalletFormType = {
-  id: number,
+  // id: number,
   value: string,
   description: string,
   currency: string,

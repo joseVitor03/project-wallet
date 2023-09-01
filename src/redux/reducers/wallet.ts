@@ -19,16 +19,13 @@ const INITIAL_STATE = {
 const wallet = (state = INITIAL_STATE, action: AnyAction) => {
   switch (action.type) {
     case CURRECIES_SEARCH_START:
-      return {
-        ...state,
-        isFetching: true,
-      };
+      return { ...state };
+      // isFetching: true,
       break;
     case CURRECIES_SEARCH_SUCCESS:
       return {
         ...state,
         currencies: action.payload,
-        isFetching: false,
       };
       break;
     case CURRECIES_SEARCH_ERROR:
@@ -40,7 +37,6 @@ const wallet = (state = INITIAL_STATE, action: AnyAction) => {
     case WALLET_FORM_START:
       return {
         ...state,
-        isFetchingWallet: true,
       };
       break;
     case WALLET_FORM_SUCCESS:
@@ -49,7 +45,8 @@ const wallet = (state = INITIAL_STATE, action: AnyAction) => {
         expenses: [
           ...state.expenses,
           {
-            ...action.payload,
+            ...action.payload.expense,
+            id: state.expenses.length,
           },
         ],
       };
