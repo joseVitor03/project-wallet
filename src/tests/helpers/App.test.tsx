@@ -110,14 +110,15 @@ describe('Tests', () => {
     expect(emailUser).toBeInTheDocument();
   });
   it('teste se o valor da despesa altera', async () => {
-    const expense = {
-      value: '11',
-      currency: 'USD',
-      method: 'Cartão de crédito',
-      tag: 'Lazer',
-      description: 'Onze dólares',
-      exchangeRates: mockData,
-    };
+    // LEMBRAR DE FAZER UMA FUNCAO PARA RETORNAR O WALLET PARA FAZER O MOCK DPS E INSERIR ELA NO LUGAR DO FETCH DA FUNCAO WALLETACTION
+    // const expense = {
+    //   value: '11',
+    //   currency: 'USD',
+    //   method: 'Cartão de crédito',
+    //   tag: 'Lazer',
+    //   description: 'Onze dólares',
+    //   exchangeRates: mockData,
+    // };
     vi.spyOn(functions, 'walletAction');
     // .mockReturnValue({
     //   type: WALLET_FORM_SUCCESS,
@@ -129,7 +130,7 @@ describe('Tests', () => {
 
     await userEvent.click(button);
 
-    const despesas = screen.getByTestId('total-field');
+    // const despesas = screen.getByTestId('total-field');
     expect(functions.walletAction).toHaveBeenCalled();
   });
 });
