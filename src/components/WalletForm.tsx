@@ -26,7 +26,7 @@ function WalletForm() {
     });
   };
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(form);
 
@@ -46,7 +46,7 @@ function WalletForm() {
 
   return (
     <section>
-      <form>
+      <form onSubmit={ (event) => handleClick(event) }>
         <label htmlFor="value">
           Valor:
           <input
@@ -97,8 +97,8 @@ function WalletForm() {
             onChange={ (event) => handleChange(event) }
           >
             <option value="Dinheiro">Dinheiro</option>
-            <option value="Credito">Cartão de crédito</option>
-            <option value="Debito">Cartão de débito</option>
+            <option value="Cartão de crédito">Cartão de crédito</option>
+            <option value="Cartão de débito">Cartão de débito</option>
           </select>
         </label>
         <label htmlFor="tag">
@@ -116,7 +116,7 @@ function WalletForm() {
             <option value="Saúde">Saúde</option>
           </select>
         </label>
-        <button onClick={ (event) => handleClick(event) }>Adicionar despesa</button>
+        <button>Adicionar despesa</button>
       </form>
     </section>
   );

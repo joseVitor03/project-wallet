@@ -1,5 +1,7 @@
 // Coloque aqui suas actions
-import { Dispatch, ReduxState, UserFormType, WalletFormType } from '../../type';
+import { Dispatch, ReduxState,
+  UserFormType, WalletFormType,
+  WalletFormSuccessType } from '../../type';
 
 export const USER_FORM = 'USER_FORM';
 
@@ -13,16 +15,6 @@ export const WALLET_FORM_ERROR = 'WALLET_FORM_ERROR';
 export const walletFormStart = () => ({ type: WALLET_FORM_START });
 
 export const walletFormError = () => ({ type: WALLET_FORM_ERROR });
-
-export type WalletFormSuccessType = {
-  // id: number,
-  value: string,
-  description: string,
-  currency: string,
-  method: string,
-  tag: string,
-  exchangeRates: unknown,
-};
 
 type GetState = () => ReduxState;
 
@@ -66,6 +58,7 @@ export const walletAction = (form: WalletFormType) => {
     try {
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
       const data = await response.json();
+      console.log(current);
       const newData = {
         ...form,
         exchangeRates: {
