@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch, GlobalState, WalletFormType } from '../type';
 import { curreciesAction, walletAction } from '../redux/actions';
@@ -35,12 +35,7 @@ function WalletForm() {
     dispatch(walletAction(form));
   };
 
-  useEffect(() => {
-    async function renderCurrencies() {
-      dispatch(curreciesAction());
-    }
-    renderCurrencies();
-  }, []);
+  dispatch(curreciesAction());
 
   const currencies = useSelector((state: GlobalState) => state.wallet.currencies);
 

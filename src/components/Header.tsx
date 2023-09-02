@@ -1,5 +1,4 @@
 import { useSelector } from 'react-redux';
-import { useEffect, useState } from 'react';
 import { ReduxState } from '../type';
 
 type PropHeader = {

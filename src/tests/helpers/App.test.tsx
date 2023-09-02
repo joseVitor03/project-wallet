@@ -1,11 +1,9 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/dom';
+import { screen } from '@testing-library/dom';
 import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './renderWith';
 import App from '../../App';
 import * as functions from '../../redux/actions';
-import { WALLET_FORM_SUCCESS } from '../../redux/actions';
-import mockData from './mockData';
 
 afterEach(() => {
   vi.clearAllMocks();

@@ -5,8 +5,6 @@ import {
   CURRECIES_SEARCH_ERROR,
   WALLET_FORM_START,
   WALLET_FORM_SUCCESS,
-  WALLET_FORM_ERROR,
-  WalletFormSuccessType,
 } from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
