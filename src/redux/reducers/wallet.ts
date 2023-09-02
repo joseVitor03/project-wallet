@@ -5,6 +5,7 @@ import {
   CURRECIES_SEARCH_ERROR,
   WALLET_FORM_START,
   WALLET_FORM_SUCCESS,
+  EXPENSE_DELETE_SUCCESS,
 } from '../actions';
 
 // Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
@@ -48,6 +49,15 @@ const wallet = (state = INITIAL_STATE, action: AnyAction) => {
           },
         ],
       };
+      break;
+    case EXPENSE_DELETE_SUCCESS:
+      return {
+        ...state,
+        expenses: [
+          ...action.payload,
+        ],
+      };
+      break;
     default:
       return state;
       break;

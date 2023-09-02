@@ -11,6 +11,12 @@ export const CURRECIES_SEARCH_ERROR = 'CURRECIES_SEARCH_ERROR';
 export const WALLET_FORM_START = 'WALLET_FORM_START';
 export const WALLET_FORM_SUCCESS = 'WALLET_FORM_SUCCESS';
 export const WALLET_FORM_ERROR = 'WALLET_FORM_ERROR';
+export const EXPENSE_DELETE_SUCCESS = 'EXPENSE_DELETE_SUCCESS';
+
+export const expenseDeleteSuccess = (expense: WalletFormSuccessType[]) => ({
+  type: EXPENSE_DELETE_SUCCESS,
+  payload: expense,
+});
 
 export const walletFormStart = () => ({ type: WALLET_FORM_START });
 
@@ -54,11 +60,10 @@ export const curreciesAction = () => {
 export const walletAction = (form: WalletFormType) => {
   return async (dispatch: Dispatch, getState: GetState) => {
     dispatch(walletFormStart());
-    const current = getState();
+    // const current = getState();
     try {
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
       const data = await response.json();
-      console.log(current);
       const newData = {
         ...form,
         exchangeRates: {
@@ -68,6 +73,19 @@ export const walletAction = (form: WalletFormType) => {
       dispatch(walletFormSuccess(newData));
     } catch (error) {
       dispatch(walletFormError());
+    }
+  };
+};
+
+export const deleteAction = (id: number | undefined) => {
+  return async (dispatch: Dispatch, getState: GetState) => {
+    const { wallet } = getState();
+    const { expenses } = wallet;
+    const newExpenses = expenses.filter((expense) => expense.id !== id);
+    try {
+      dispatch(expenseDeleteSuccess(newExpenses));
+    } catch (error) {
+      console.log('Erro no delete');
     }
   };
 };

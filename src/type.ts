@@ -35,6 +35,7 @@ export type GlobalState = {
 };
 
 export type WalletFormSuccessType = {
+  id?: number
   value: string,
   description: string,
   currency: string,

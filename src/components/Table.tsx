@@ -1,8 +1,15 @@
-import { useSelector } from 'react-redux';
-import { ReduxState } from '../type';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { Dispatch, ReduxState } from '../type';
+import { deleteAction } from '../redux/actions';
 
 function Table() {
+  const dispatch: Dispatch = useDispatch();
   const { expenses } = useSelector((state: ReduxState) => state.wallet);
+  // if (expenses) {
+  //   console.log(expenses);
+  // }
+
   return (
     <table>
       <thead>
@@ -21,8 +28,8 @@ function Table() {
       {expenses && (
         <tbody>
           {expenses.map(({ description,
-            tag, value, currency, exchangeRates, method }) => (
-              <tr key={ description }>
+            tag, value, currency, exchangeRates, method, id }) => (
+              <tr key={ id }>
                 <td>{description}</td>
                 <td>{tag}</td>
                 <td>{method}</td>
@@ -36,6 +43,14 @@ function Table() {
                 </td>
                 <td>
                   Real
+                </td>
+                <td>
+                  <button
+                    data-testid="delete-btn"
+                    onClick={ () => dispatch(deleteAction(id)) }
+                  >
+                    Excluir
+                  </button>
                 </td>
               </tr>
           ))}
