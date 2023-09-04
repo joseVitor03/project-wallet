@@ -13,6 +13,7 @@ function Login() {
   };
   const [form, setForm] = useState(INITIAL_STATE_LOGIN);
   const [email, setEmail] = useState(false);
+
   const handleForm = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault();
     dispatch(userForm(form));
@@ -37,7 +38,7 @@ function Login() {
       <label htmlFor="email">
         Email:
         <input
-          type="email"
+          type="text"
           data-testid="email-input"
           id="email"
           onChange={ (e) => handleChange(e) }

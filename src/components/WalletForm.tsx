@@ -36,7 +36,7 @@ function WalletForm() {
   };
   useEffect(() => {
     dispatch(curreciesAction());
-  });
+  }, []);
 
   const currencies = useSelector((state: GlobalState) => state.wallet.currencies);
 

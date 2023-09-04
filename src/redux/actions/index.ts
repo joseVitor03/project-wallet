@@ -60,7 +60,8 @@ export const curreciesAction = () => {
 export const walletAction = (form: WalletFormType) => {
   return async (dispatch: Dispatch, getState: GetState) => {
     dispatch(walletFormStart());
-    // const current = getState();
+    const current = getState();
+    console.log(current);
     try {
       const response = await fetch('https://economia.awesomeapi.com.br/json/all');
       const data = await response.json();
