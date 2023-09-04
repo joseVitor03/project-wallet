@@ -3,7 +3,8 @@ import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
 import { renderWithRouterAndRedux } from './renderWith';
 import App from '../../App';
-import * as functions from '../../redux/actions';
+import * as functions from './helpers';
+import mockData from './mockData';
 
 afterEach(() => {
   vi.clearAllMocks();
@@ -109,18 +110,15 @@ describe('Tests', () => {
   });
   it('teste se o valor da despesa altera', async () => {
     // LEMBRAR DE FAZER UMA FUNCAO PARA RETORNAR O WALLET PARA FAZER O MOCK DPS E INSERIR ELA NO LUGAR DO FETCH DA FUNCAO WALLETACTION
-    // const expense = {
-    //   value: '11',
-    //   currency: 'USD',
-    //   method: 'Cartão de crédito',
-    //   tag: 'Lazer',
-    //   description: 'Onze dólares',
-    //   exchangeRates: mockData,
-    // };
-    vi.spyOn(functions, 'walletAction');
-    // .mockReturnValue({
-    //   type: WALLET_FORM_SUCCESS,
-    //   payload: { expense } });
+    const expense = {
+      value: '11',
+      currency: 'USD',
+      method: 'Cartão de crédito',
+      tag: 'Lazer',
+      description: 'Onze dólares',
+      exchangeRates: mockData,
+    };
+    vi.spyOn(functions, 'fetchFunction').mockResolvedValue(mockData);
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
     const button = screen.getByRole('button', {
       name: /adicionar despesa/i,
@@ -129,6 +127,22 @@ describe('Tests', () => {
     await userEvent.click(button);
 
     // const despesas = screen.getByTestId('total-field');
-    expect(functions.walletAction).toHaveBeenCalled();
+    expect(functions.fetchFunction).toHaveBeenCalled();
+  });
+  it('testando se o componente table esta renderizando', async () => {
+    renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
+    const placeValue = screen.getByRole('spinbutton', {
+      name: /valor:/i,
+    });
+    const description = screen.getByRole('textbox', {
+      name: /descrição:/i,
+    });
+    const button = screen.getByRole('button', {
+      name: /adicionar despesa/i,
+    });
+    await userEvent.type(placeValue, '5');
+    await userEvent.type(description, 'coxinha');
+    await userEvent.click(button);
+    expect(await screen.findByText('5.00')).toBeInTheDocument();
   });
 });

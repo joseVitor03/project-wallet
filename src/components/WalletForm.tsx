@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Dispatch, GlobalState, WalletFormType } from '../type';
-import { curreciesAction, walletAction } from '../redux/actions';
+import { curreciesAction, toEditAction, walletAction } from '../redux/actions';
+import '../App.css';
 
 function WalletForm() {
   const INITIAL_STATE = {
@@ -13,6 +14,7 @@ function WalletForm() {
     tag: 'Alimentação',
   };
 
+  const { editor } = useSelector((state: GlobalState) => state.wallet);
   const dispatch: Dispatch = useDispatch();
   const [form, setForm] = useState<WalletFormType>(INITIAL_STATE);
   const [idExpense, setIdExpense] = useState<number>(0);
@@ -25,14 +27,17 @@ function WalletForm() {
       [id]: value,
     });
   };
+  console.log(form);
 
   const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(form);
-
-    setForm(INITIAL_STATE);
-    setIdExpense(idExpense + 1);
-    dispatch(walletAction(form));
+    if (editor) {
+      dispatch(toEditAction(form));
+    } else {
+      setForm(INITIAL_STATE);
+      setIdExpense(idExpense + 1);
+      dispatch(walletAction(form));
+    }
   };
   useEffect(() => {
     dispatch(curreciesAction());
@@ -66,6 +71,7 @@ function WalletForm() {
         <label htmlFor="currency">
           Moeda:
           <select
+            className="coin"
             id="currency"
             data-testid="currency-input"
             value={ form.currency }
@@ -112,7 +118,9 @@ function WalletForm() {
             <option value="Saúde">Saúde</option>
           </select>
         </label>
-        <button>Adicionar despesa</button>
+        <button>
+          { editor ? 'Editar despesa' : 'Adicionar despesa'}
+        </button>
       </form>
     </section>
   );

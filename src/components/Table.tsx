@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
 import { Dispatch, ReduxState } from '../type';
-import { deleteAction } from '../redux/actions';
+import { deleteAction, editAction } from '../redux/actions';
 
 function Table() {
   const dispatch: Dispatch = useDispatch();
@@ -45,6 +44,12 @@ function Table() {
                   Real
                 </td>
                 <td>
+                  <button
+                    data-testid="edit-btn"
+                    onClick={ () => dispatch(editAction(id)) }
+                  >
+                    Editar
+                  </button>
                   <button
                     data-testid="delete-btn"
                     onClick={ () => dispatch(deleteAction(id)) }

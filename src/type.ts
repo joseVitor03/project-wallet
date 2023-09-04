@@ -35,13 +35,13 @@ export type GlobalState = {
 };
 
 export type WalletFormSuccessType = {
-  id?: number
+  id?: number,
   value: string,
   description: string,
   currency: string,
   method: string,
   tag: string,
-  exchangeRates: any,
+  exchangeRates?: any,
 };
 
 export type WalletActionType = {
