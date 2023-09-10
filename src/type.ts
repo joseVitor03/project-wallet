@@ -1,16 +1,55 @@
 import { AnyAction } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
+import { S } from 'vitest/dist/types-e3c9754d';
 
-export type UserFormType = {
+export type FormLoginType = {
   email: string,
+  password: string,
 };
 
-export type UserActionType = {
+export type FormActionType = {
   type: string,
-  payload: UserFormType,
+  payload: string,
 };
 
-export type CurreciesType = {
+export type GlobalState = {
+  user: {
+    email: string,
+  },
+  wallet: {
+    currencies: [],
+    expenses: [{
+      id: number,
+      value: string,
+      description: string,
+      currency: string,
+      method: string,
+      tag: string,
+      exchangeRates: {
+        [ARS: string]: CurrenciesType,
+        AUD: CurrenciesType,
+        USD: CurrenciesType,
+        BTC: CurrenciesType,
+        CAD: CurrenciesType,
+        CHF: CurrenciesType,
+        CNY: CurrenciesType,
+        DOGE: CurrenciesType,
+        ETH: CurrenciesType,
+        EUR: CurrenciesType,
+        GBP: CurrenciesType,
+        ILS: CurrenciesType,
+        JPY: CurrenciesType,
+        LTC: CurrenciesType,
+        USDT: CurrenciesType,
+        XRP: CurrenciesType,
+      },
+    }],
+    isEditing: boolean,
+    idEdit: number,
+  },
+};
+
+export type CurrenciesType = {
   ask: string,
   bid: string,
   code: string,
@@ -24,33 +63,8 @@ export type CurreciesType = {
   varBid: string,
 };
 
-export type GlobalState = {
-  user: UserFormType,
-  wallet: {
-    currencies: any[], // array de string
-    expenses: [], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
-    editor: false, // valor booleano que indica se uma despesa está sendo editada
-    idToEdit: 0,
-  }
-};
-
-export type WalletFormSuccessType = {
-  id?: number,
-  value: string,
-  description: string,
-  currency: string,
-  method: string,
-  tag: string,
-  exchangeRates?: any,
-};
-
-export type WalletActionType = {
-  type: string,
-  payload: WalletFormSuccessType
-};
-
-export type WalletFormType = {
-  // id: number,
+export type FormExpenseType = {
+  id: number,
   value: string,
   description: string,
   currency: string,
@@ -58,15 +72,58 @@ export type WalletFormType = {
   tag: string,
 };
 
-export type ReduxState = {
-  isFetching: boolean,
-  user: UserFormType,
-  wallet: {
-    currencies: any[], // array de string
-    expenses: WalletFormSuccessType[], // array de objetos, com cada objeto tendo as chaves id, value, currency, method, tag, description e exchangeRates
-    editor: false, // valor booleano que indica se uma despesa está sendo editada
-    idToEdit: 0,
-  }
+export type FormSuccessExpenses = {
+  id: number,
+  value: string,
+  description: string,
+  currency: string,
+  method: string,
+  tag: string,
+  exchangeRates: {
+    [ARS: string]: CurrenciesType,
+    AUD: CurrenciesType,
+    USD: CurrenciesType,
+    BTC: CurrenciesType,
+    CAD: CurrenciesType,
+    CHF: CurrenciesType,
+    CNY: CurrenciesType,
+    DOGE: CurrenciesType,
+    ETH: CurrenciesType,
+    EUR: CurrenciesType,
+    GBP: CurrenciesType,
+    ILS: CurrenciesType,
+    JPY: CurrenciesType,
+    LTC: CurrenciesType,
+    USDT: CurrenciesType,
+    XRP: CurrenciesType,
+  },
 };
 
-export type Dispatch = ThunkDispatch<ReduxState, null, AnyAction>;
+export type ExpenseRemoveType = {
+  id: number,
+  value: string,
+  description: string,
+  currency: string,
+  method: string,
+  tag: string,
+  exchangeRates: {
+    [ARS: string]: CurrenciesType,
+    AUD: CurrenciesType,
+    USD: CurrenciesType,
+    BTC: CurrenciesType,
+    CAD: CurrenciesType,
+    CHF: CurrenciesType,
+    CNY: CurrenciesType,
+    DOGE: CurrenciesType,
+    ETH: CurrenciesType,
+    EUR: CurrenciesType,
+    GBP: CurrenciesType,
+    ILS: CurrenciesType,
+    JPY: CurrenciesType,
+    LTC: CurrenciesType,
+    USDT: CurrenciesType,
+    XRP: CurrenciesType,
+  },
+};
+
+export type Dispatch = ThunkDispatch<GlobalState, null, AnyAction>;

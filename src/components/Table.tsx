@@ -1,17 +1,17 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch, ReduxState } from '../type';
-import { deleteAction, editAction } from '../redux/actions';
+import style from './table.module.css';
+import { Dispatch, GlobalState } from '../type';
+import { isEditing, removeAction } from '../redux/actions';
 
 function Table() {
+  const { expenses } = useSelector((state: GlobalState) => state.wallet);
   const dispatch: Dispatch = useDispatch();
-  const { expenses } = useSelector((state: ReduxState) => state.wallet);
-  // if (expenses) {
-  //   console.log(expenses);
-  // }
+  console.log(expenses);
 
   return (
-    <table>
-      <thead>
+    <table className={ style.table }>
+      <thead className={ style.thead }>
         <tr>
           <th>Descrição</th>
           <th>Tag</th>
@@ -24,42 +24,39 @@ function Table() {
           <th>Editar/Excluir</th>
         </tr>
       </thead>
-      {expenses && (
-        <tbody>
-          {expenses.map(({ description,
-            tag, value, currency, exchangeRates, method, id }) => (
-              <tr key={ id }>
-                <td>{description}</td>
-                <td>{tag}</td>
-                <td>{method}</td>
-                <td>{Number(value).toFixed(2)}</td>
-                <td>{exchangeRates[currency].name}</td>
-                <td>
-                  {Number(exchangeRates[currency].ask).toFixed(2)}
-                </td>
-                <td>
-                  {Number(exchangeRates[currency].ask * Number(value)).toFixed(2)}
-                </td>
-                <td>
-                  Real
-                </td>
-                <td>
-                  <button
-                    data-testid="edit-btn"
-                    onClick={ () => dispatch(editAction(id)) }
-                  >
-                    Editar
-                  </button>
-                  <button
-                    data-testid="delete-btn"
-                    onClick={ () => dispatch(deleteAction(id)) }
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-          ))}
-        </tbody>)}
+      <tbody className={ style.tbody }>
+        { expenses.map((expense) => (
+          <tr key={ expense.id }>
+            <td>{expense.description}</td>
+            <td>{expense.tag}</td>
+            <td>{expense.method}</td>
+            <td>{Number(expense.value).toFixed(2)}</td>
+            <td>{expense.exchangeRates[expense.currency].name}</td>
+            <td>{Number(expense.exchangeRates[expense.currency].ask).toFixed(2)}</td>
+            <td>
+              {(Number(expense.exchangeRates[expense.currency].ask)
+              * Number(expense.value)).toFixed(2)}
+            </td>
+            <td>Real</td>
+            <td>
+              <button
+                className={ style.delete_btn }
+                data-testid="delete-btn"
+                onClick={ () => dispatch(removeAction(expense)) }
+              >
+                Excluir
+              </button>
+              <button
+                className={ style.edit_btn }
+                data-testid="edit-btn"
+                onClick={ () => dispatch(isEditing(expense.id)) }
+              >
+                Editar
+              </button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
     </table>
   );
 }

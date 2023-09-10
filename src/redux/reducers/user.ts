@@ -1,16 +1,16 @@
-import { USER_FORM } from '../actions';
-import { UserActionType } from '../../type';
-// Esse reducer será responsável por tratar as informações da pessoa usuária
+import { FormActionType } from '../../type';
+import { LOGIN_EMAIL } from '../actions';
+
 const INITIAL_STATE = {
   email: '',
 };
 
-const user = (state = INITIAL_STATE, action: UserActionType) => {
+const user = (state = INITIAL_STATE, action: FormActionType) => {
   switch (action.type) {
-    case USER_FORM:
+    case LOGIN_EMAIL:
       return {
         ...state,
-        email: action.payload.email,
+        email: action.payload,
       };
       break;
     default:

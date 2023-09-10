@@ -1,0 +1,54 @@
+.table {
+    margin: auto;
+    height: auto;
+}
+
+.thead {
+    color: white;
+}
+
+.table th {
+    text-align: center;
+    padding: 1%;
+    width: 250px;
+    border-bottom: 2px solid white;
+}
+
+.tbody {
+    color: white;
+    margin: auto;
+}
+
+.tbody td {
+    text-align: center;
+    padding: 1%;
+    align-items: center;
+}
+
+.delete_btn {
+    background-color: red;
+    border: none;
+    padding: 2%;
+    border-radius: 10px;
+    color: white;
+    margin: 1%;
+    cursor: pointer;
+}
+
+.delete_btn:hover {
+    box-shadow: 0 0 10px red;
+}
+
+.edit_btn {
+    background-color: rgb(60, 60, 244);
+    border: none;
+    padding: 2%;
+    border-radius: 10px;
+    color: white;
+    margin: 1%;
+    cursor: pointer;
+}
+
+.edit_btn:hover {
+    box-shadow: 0 0 10px blue;
+}

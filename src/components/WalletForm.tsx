@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Dispatch, GlobalState, WalletFormType } from '../type';
-import { curreciesAction, toEditAction, walletAction } from '../redux/actions';
-import '../App.css';
+import style from './walletForm.module.css';
+import { Dispatch, GlobalState } from '../type';
+import { editExpenseAction,
+  expensesAction, searchCurrenciesAction } from '../redux/actions';
 
 function WalletForm() {
-  const INITIAL_STATE = {
-    // id: 0,
+  const INIITIAL_STATE = {
+    id: 0,
     value: '',
     description: '',
     currency: 'USD',
@@ -14,11 +15,26 @@ function WalletForm() {
     tag: 'Alimentação',
   };
 
-  const { editor } = useSelector((state: GlobalState) => state.wallet);
   const dispatch: Dispatch = useDispatch();
-  const [form, setForm] = useState<WalletFormType>(INITIAL_STATE);
-  const [idExpense, setIdExpense] = useState<number>(0);
+  const { currencies, isEditing } = useSelector((state: GlobalState) => state.wallet);
+  const [form, setForm] = useState(INIITIAL_STATE);
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (isEditing) {
+      dispatch(editExpenseAction(form));
+      setForm({
+        ...INIITIAL_STATE,
+        id: form.id,
+      });
+    } else {
+      dispatch(expensesAction(form));
+      setForm({
+        ...INIITIAL_STATE,
+        id: form.id + 1,
+      });
+    }
+  };
   const handleChange = (event:
   React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { id, value } = event.target;
@@ -27,102 +43,78 @@ function WalletForm() {
       [id]: value,
     });
   };
-  console.log(form);
-
-  const handleClick = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (editor) {
-      dispatch(toEditAction(form));
-    } else {
-      setForm(INITIAL_STATE);
-      setIdExpense(idExpense + 1);
-      dispatch(walletAction(form));
-    }
-  };
   useEffect(() => {
-    dispatch(curreciesAction());
+    async function searchCurrencies() {
+      dispatch(searchCurrenciesAction());
+    }
+    searchCurrencies();
   }, []);
-
-  const currencies = useSelector((state: GlobalState) => state.wallet.currencies);
+  const { value, description, tag, currency, method } = form;
+  console.log(isEditing);
 
   return (
-    <section>
-      <form onSubmit={ (event) => handleClick(event) }>
-        <label htmlFor="value">
-          Valor:
-          <input
-            type="number"
-            id="value"
-            value={ form.value }
-            data-testid="value-input"
-            onChange={ (event) => handleChange(event) }
-          />
-        </label>
-        <label htmlFor="description">
-          Descrição:
-          <input
-            type="text"
-            id="description"
-            value={ form.description }
-            data-testid="description-input"
-            onChange={ (event) => handleChange(event) }
-          />
-        </label>
-        <label htmlFor="currency">
-          Moeda:
-          <select
-            className="coin"
-            id="currency"
-            data-testid="currency-input"
-            value={ form.currency }
-            onChange={ (event) => handleChange(event) }
-          >
-            {currencies && (
-              <>
-                {currencies.map((currencie) => (
-                  <option
-                    key={ currencie }
-                    value={ currencie }
-                  >
-                    {currencie}
-                  </option>
-                ))}
-              </>)}
-          </select>
-        </label>
-        <label htmlFor="method">
-          Metodo de pagamento:
-          <select
-            data-testid="method-input"
-            value={ form.method }
-            id="method"
-            onChange={ (event) => handleChange(event) }
-          >
-            <option value="Dinheiro">Dinheiro</option>
-            <option value="Cartão de crédito">Cartão de crédito</option>
-            <option value="Cartão de débito">Cartão de débito</option>
-          </select>
-        </label>
-        <label htmlFor="tag">
-          Tag
-          <select
-            data-testid="tag-input"
-            value={ form.tag }
-            id="tag"
-            onChange={ (event) => handleChange(event) }
-          >
-            <option value="Alimentação">Alimentação</option>
-            <option value="Lazer">Lazer</option>
-            <option value="Trabalho">Trabalho</option>
-            <option value="Transporte">Transporte</option>
-            <option value="Saúde">Saúde</option>
-          </select>
-        </label>
-        <button>
-          { editor ? 'Editar despesa' : 'Adicionar despesa'}
-        </button>
+    <main className={ style.container }>
+      <form
+        className={ style.form }
+        onSubmit={ (e) => handleSubmit(e) }
+      >
+        <label htmlFor="value">Valor:</label>
+        <input
+          type="number"
+          id="value"
+          value={ value }
+          data-testid="value-input"
+          onChange={ (e) => handleChange(e) }
+        />
+        <label htmlFor="description">Descrição:</label>
+        <input
+          type="text"
+          id="description"
+          value={ description }
+          data-testid="description-input"
+          onChange={ (e) => handleChange(e) }
+        />
+        <label htmlFor="currency">Moeda:</label>
+        <select
+          className={ style.select }
+          id="currency"
+          value={ currency }
+          data-testid="currency-input"
+          onChange={ (e) => handleChange(e) }
+        >
+          { currencies.map((curr) => (
+            <option key={ curr } value={ curr }>{curr}</option>
+          ))}
+        </select>
+        <label htmlFor="method">Método de pagamento:</label>
+        <select
+          id="method"
+          className={ style.select }
+          value={ method }
+          data-testid="method-input"
+          onChange={ (e) => handleChange(e) }
+        >
+          <option value="Dinheiro">Dinheiro</option>
+          <option value="Cartão de crédito">Cartão de crédito</option>
+          <option value="Cartão de débito">Cartão de débito</option>
+        </select>
+        <label htmlFor="tag">Tag:</label>
+        <select
+          id="tag"
+          className={ style.select }
+          value={ tag }
+          data-testid="tag-input"
+          onChange={ (e) => handleChange(e) }
+        >
+          <option value="Alimentação">Alimentação</option>
+          <option value="Lazer">Lazer</option>
+          <option value="Trabalho">Trabalho</option>
+          <option value="Transporte">Transporte</option>
+          <option value="Saúde">Saúde</option>
+        </select>
+        <button>{ isEditing ? 'Editar despesa' : 'Adicionar despesa' }</button>
       </form>
-    </section>
+    </main>
   );
 }
 

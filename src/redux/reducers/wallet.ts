@@ -1,48 +1,42 @@
-import { AnyAction } from 'redux';
-import {
-  CURRECIES_SEARCH_SUCCESS,
-  CURRECIES_SEARCH_ERROR,
-  WALLET_FORM_SUCCESS,
-  EXPENSE_DELETE_SUCCESS,
-  EDIT_START,
-  TO_EDIT_EXPENSE,
-} from '../actions';
-
-// Esse reducer será responsável por tratar o todas as informações relacionadas as despesas
+import { FormActionType } from '../../type';
+import { ADD_EXPENSES,
+  EDIT_EXPENSE,
+  IS_EDITING,
+  REMOVE_EXPENSE,
+  SEARCH_CURRENCIES_START, SEARCH_CURRENCIES_SUCCESS } from '../actions';
 
 const INITIAL_STATE = {
   currencies: [],
   expenses: [],
-  editor: false,
+  isEditing: false,
+  idEdit: 0,
 };
 
-const wallet = (state = INITIAL_STATE, action: AnyAction) => {
+function wallet(state = INITIAL_STATE, action: FormActionType) {
   switch (action.type) {
-    case CURRECIES_SEARCH_SUCCESS:
+    case SEARCH_CURRENCIES_START:
+      return {
+        ...state,
+        isLoading: true,
+      };
+      break;
+    case SEARCH_CURRENCIES_SUCCESS:
       return {
         ...state,
         currencies: action.payload,
       };
       break;
-    case CURRECIES_SEARCH_ERROR:
-      return {
-        ...state,
-        errorMessage: 'Erro na Busca',
-      };
-      break;
-    case WALLET_FORM_SUCCESS:
+    case ADD_EXPENSES:
       return {
         ...state,
         expenses: [
           ...state.expenses,
-          {
-            ...action.payload.expense,
-            id: state.expenses.length,
-          },
+          action.payload,
         ],
+        isEditing: false,
       };
       break;
-    case EXPENSE_DELETE_SUCCESS:
+    case REMOVE_EXPENSE:
       return {
         ...state,
         expenses: [
@@ -50,22 +44,25 @@ const wallet = (state = INITIAL_STATE, action: AnyAction) => {
         ],
       };
       break;
-    case EDIT_START:
+    case IS_EDITING:
       return {
         ...state,
-        editor: true,
-        idToEdit: action.payload,
+        isEditing: true,
+        idEdit: action.payload,
       };
-    case TO_EDIT_EXPENSE:
+      break;
+    case EDIT_EXPENSE:
       return {
         ...state,
         expenses: [
-          ...action.form,
+          ...action.payload,
         ],
+        isEditing: false,
       };
     default:
       return state;
+      break;
   }
-};
+}
 
 export default wallet;

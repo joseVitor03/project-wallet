@@ -1,22 +1,27 @@
 import { useSelector } from 'react-redux';
-import { ReduxState } from '../type';
+import { useEffect, useState } from 'react';
+import { GlobalState } from '../type';
+import styles from './header.module.css';
 
-type PropHeader = {
-  email: string,
-};
-
-function Header({ email }: PropHeader) {
-  const { expenses } = useSelector((state: ReduxState) => state.wallet);
-
-  const totalDespesas: number = expenses.reduce((sum, valueCurr) => (
-    Number(valueCurr.exchangeRates[valueCurr.currency]
-      .ask * Number(valueCurr.value)) + sum
-  ), 0);
-
+function Header() {
+  const { email } = useSelector((state: GlobalState) => state.user);
+  const { expenses } = useSelector((state: GlobalState) => state.wallet);
+  const [totalExpenses, setTotalExpenses] = useState(0);
+  useEffect(() => {
+    const total = expenses.reduce((sum, valueCurr) => (
+      Number(valueCurr.exchangeRates[valueCurr.currency].ask)
+      * Number(valueCurr.value) + sum), 0);
+    setTotalExpenses(total);
+  }, [expenses]);
   return (
-    <header>
-      <h6 data-testid="email-field">{email}</h6>
-      <h4 data-testid="total-field">{totalDespesas.toFixed(2)}</h4>
+    <header className={ styles.header }>
+      <h6 data-testid="email-field">{`Email: ${email}`}</h6>
+      <h4
+        className={ styles.total }
+        data-testid="total-field"
+      >
+        {totalExpenses.toFixed(2)}
+      </h4>
       <h4 data-testid="header-currency-field">BRL</h4>
     </header>
   );

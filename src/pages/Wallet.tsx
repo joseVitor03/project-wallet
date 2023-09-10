@@ -1,14 +1,12 @@
-import { useSelector } from 'react-redux';
-import { GlobalState } from '../type';
 import Header from '../components/Header';
-import WalletForm from '../components/WalletForm';
 import Table from '../components/Table';
+import WalletForm from '../components/WalletForm';
+import style from './pages.module.css';
 
 function Wallet() {
-  const { email } = useSelector((state: GlobalState) => state.user);
   return (
-    <main>
-      <Header email={ email } />
+    <main className={ style.pageTotal }>
+      <Header />
       <WalletForm />
       <Table />
     </main>
