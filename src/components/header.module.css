@@ -1,12 +1,12 @@
 .header {
   align-items: center;
-  display: flex;
-  justify-content: space-between;
   background-color: rgb(50, 49, 49);
   color: white;
+  display: flex;
+  justify-content: space-between;
+  overflow: hidden;
   padding: 2%;
   width: 100vw;
-  overflow: hidden;
 }
 
 .total {

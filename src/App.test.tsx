@@ -1,10 +1,10 @@
 import { screen } from '@testing-library/dom';
 import { vi } from 'vitest';
 import userEvent from '@testing-library/user-event';
-import { renderWithRouterAndRedux } from './renderWith';
-import App from '../../App';
-import * as functions from './helpers';
-import mockData from './mockData';
+import { renderWithRouterAndRedux } from './tests/helpers/renderWith';
+import App from './App';
+import * as functions from './tests/helpers/helpers';
+import mockData from './tests/helpers/mockData';
 
 afterEach(() => {
   vi.clearAllMocks();

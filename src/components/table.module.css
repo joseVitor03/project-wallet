@@ -1,54 +1,54 @@
 .table {
-    margin: auto;
-    height: auto;
+  height: auto;
+  margin: auto;
 }
 
 .thead {
-    color: white;
+  color: white;
 }
 
 .table th {
-    text-align: center;
-    padding: 1%;
-    width: 250px;
-    border-bottom: 2px solid white;
+  border-bottom: 2px solid white;
+  padding: 1%;
+  text-align: center;
+  width: 250px;
 }
 
 .tbody {
-    color: white;
-    margin: auto;
+  color: white;
+  margin: auto;
 }
 
 .tbody td {
-    text-align: center;
-    padding: 1%;
-    align-items: center;
+  align-items: center;
+  padding: 1%;
+  text-align: center;
 }
 
 .delete_btn {
-    background-color: red;
-    border: none;
-    padding: 2%;
-    border-radius: 10px;
-    color: white;
-    margin: 1%;
-    cursor: pointer;
+  background-color: red;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin: 1%;
+  padding: 2%;
 }
 
 .delete_btn:hover {
-    box-shadow: 0 0 10px red;
+  box-shadow: 0 0 10px red;
 }
 
 .edit_btn {
-    background-color: rgb(60, 60, 244);
-    border: none;
-    padding: 2%;
-    border-radius: 10px;
-    color: white;
-    margin: 1%;
-    cursor: pointer;
+  background-color: rgb(60, 60, 244);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  margin: 1%;
+  padding: 2%;
 }
 
 .edit_btn:hover {
-    box-shadow: 0 0 10px blue;
+  box-shadow: 0 0 10px blue;
 }

@@ -1,71 +1,73 @@
 * {
-  padding: 0;
-  margin: 0;
   box-sizing: border-box;
+  margin: 0;
   overflow-x: hidden;
   overflow-y: auto;
+  padding: 0;
 }
 
 .pageTotal {
-  width: 100vw;
-  /* height: 100vh; */
+  background-color: rgb(40, 39, 39);
   display: flex;
   flex-direction: column;
-  background-color: rgb(40, 39, 39);
+  height: 100vh;
+  width: 100vw;
 }
 
 .container {
+  align-items: center;
+  background-image: url('wallpapersden.com_dark-natural-landscape-hd-black-aesthetic_1920x1080.jpg');
+  color: white;
   display: flex;
   flex-direction: column;
-  background-image: url(wallpapersden.com_dark-natural-landscape-hd-black-aesthetic_1920x1080.jpg);
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
   height: 100vh;
-  color: white;
+  justify-content: center;
+  width: 100vw;
 }
 
 .form {
-  display: flex;
-  flex-direction: column;
-  width: 500px;
-  height: 450px;
-  padding: 3%;
-  background: transparent;
+  align-items: center;
   backdrop-filter: blur(8px);
+  background: transparent;
   border: 2px solid white;
   border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 450px;
   justify-content: center;
-  align-items: center;
+  padding: 3%;
+  width: 500px;
 }
 
 .form label {
-  width: 90%;
-  display: flex;
-  text-align: left;
-  flex-direction: column;
   align-items: left;
+  background-color: none;
+  display: flex;
   flex-direction: column;
+  text-align: left;
+  width: 90%;
 }
 
 .form input {
-  width: 100%;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  color: black;
   margin: 2% 0 5%;
   padding: 2%;
-  border-radius: 10px;
-  border: none;
+  width: 100%;
 }
 
-.form button {
+.btnSubmitDisabled {
+  background-color: gray;
+  padding: 3%;
   width: 100%;
-  padding: 2%;
-  font-size: 16px;
-  border-radius: 10px;
-  border: none;
 }
 
 .btnSubmitEnabled {
   background-color: aqua;
   color: black;
+  padding: 3%;
   transition: 0.5s;
+  width: 100%;
 }
