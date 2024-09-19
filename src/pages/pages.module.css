@@ -16,13 +16,17 @@
 
 .container {
   align-items: center;
-  background-image: url('wallpapersden.com_dark-natural-landscape-hd-black-aesthetic_1920x1080.jpg');
+  background-color: rgb(61, 61, 61);
   color: white;
   display: flex;
   flex-direction: column;
   height: 100vh;
   justify-content: center;
   width: 100vw;
+}
+
+h1 {
+  margin: 2% auto;
 }
 
 .form {
@@ -62,6 +66,8 @@
   background-color: gray;
   padding: 3%;
   width: 100%;
+  border-radius: 10px;
+  margin-top: 2%;
 }
 
 .btnSubmitEnabled {
@@ -70,4 +76,6 @@
   padding: 3%;
   transition: 0.5s;
   width: 100%;
+  border-radius: 10px;
+  margin-top: 2%;
 }

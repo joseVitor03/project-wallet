@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
-import { FormLoginType } from '../type';
-import { loginEmailAction } from '../redux/actions';
-import styles from './pages.module.css';
+import { FormLoginType } from '../../type';
+import { loginEmailAction } from '../../redux/actions';
+import styles from '../pages.module.css';
 
 function Login() {
   const navigate = useNavigate();
@@ -32,6 +32,7 @@ function Login() {
   const { email, password } = form;
   return (
     <main className={ styles.container }>
+      <h1>Wallet</h1>
       <form
         className={ styles.form }
         onSubmit={ (e) => handleSubmit(e) }
@@ -52,9 +53,10 @@ function Login() {
           data-testid="password-input"
           onChange={ (e) => handleChange(e) }
         />
+        { password.length !== 8 && <p>A senha precisa ter ao menos 8 caracteres.</p> }
         <button
           className={
-            password.length > 6 ? styles.btnSubmitEnabled : styles.btnSubmitDisabled
+            password.length > 7 ? styles.btnSubmitEnabled : styles.btnSubmitDisabled
           }
           disabled={
             !email.match(/^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/)

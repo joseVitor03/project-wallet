@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './table.module.css';
-import { Dispatch, GlobalState } from '../type';
-import { isEditing, removeAction } from '../redux/actions';
+import { Dispatch, GlobalState } from '../../type';
+import { isEditing, removeAction } from '../../redux/actions';
 
 function Table() {
   const { expenses } = useSelector((state: GlobalState) => state.wallet);

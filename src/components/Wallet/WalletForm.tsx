@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './walletForm.module.css';
-import { Dispatch, GlobalState } from '../type';
+import { Dispatch, GlobalState } from '../../type';
 import { editExpenseAction,
-  expensesAction, searchCurrenciesAction } from '../redux/actions';
+  expensesAction, searchCurrenciesAction } from '../../redux/actions';
 
 function WalletForm() {
   const INIITIAL_STATE = {

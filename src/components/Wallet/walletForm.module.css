@@ -21,6 +21,7 @@
   margin: auto;
   padding: 5%;
   width: 50vw;
+  border-radius: 10px;
 }
 
 .form input {
@@ -43,6 +44,10 @@
   padding: 1%;
   text-align: center;
   width: 35%;
+}
+
+.select > option {
+  color: black;
 }
 
 .form button {
