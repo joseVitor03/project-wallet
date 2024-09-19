@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { GlobalState } from '../type';
+import { GlobalState } from '../../type';
 import styles from './header.module.css';
 
 function Header() {

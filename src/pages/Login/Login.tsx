@@ -53,7 +53,7 @@ function Login() {
           data-testid="password-input"
           onChange={ (e) => handleChange(e) }
         />
-        { password.length !== 8 && <p>A senha precisa ter ao menos 8 caracteres.</p> }
+        { password.length > 7 && <p>A senha precisa ter ao menos 8 caracteres.</p> }
         <button
           className={
             password.length > 7 ? styles.btnSubmitEnabled : styles.btnSubmitDisabled

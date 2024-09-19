@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import style from './table.module.css';
 import { Dispatch, GlobalState } from '../../type';
