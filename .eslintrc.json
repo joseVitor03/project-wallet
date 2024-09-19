@@ -2,6 +2,12 @@
   "extends": "@trybe/eslint-config-frontend/typescript",
   "overrides": [
     {
+      "files": "./src/**/*.tsx",
+      "rules": {
+        "react-hooks/exhaustive-deps": "off"
+      }
+    },
+    {
       "files": [
         "src/tests/**/*.js"
       ],

@@ -110,14 +110,14 @@ describe('Tests', () => {
   });
   it('teste se o valor da despesa altera', async () => {
     // LEMBRAR DE FAZER UMA FUNCAO PARA RETORNAR O WALLET PARA FAZER O MOCK DPS E INSERIR ELA NO LUGAR DO FETCH DA FUNCAO WALLETACTION
-    const expense = {
-      value: '11',
-      currency: 'USD',
-      method: 'Cartão de crédito',
-      tag: 'Lazer',
-      description: 'Onze dólares',
-      exchangeRates: mockData,
-    };
+    // const expense = {
+    //   value: '11',
+    //   currency: 'USD',
+    //   method: 'Cartão de crédito',
+    //   tag: 'Lazer',
+    //   description: 'Onze dólares',
+    //   exchangeRates: mockData,
+    // };
     vi.spyOn(functions, 'fetchFunction').mockResolvedValue(mockData);
     renderWithRouterAndRedux(<App />, { initialEntries: ['/carteira'] });
     const button = screen.getByRole('button', {
