@@ -73,7 +73,7 @@ describe('Tests', () => {
       name: /moeda:/i,
     });
     const payment = screen.getByRole('combobox', {
-      name: /metodo de pagamento:/i,
+      name: /método de pagamento:/i,
     });
     const tagFood = screen.getByRole('combobox', {
       name: /tag/i,

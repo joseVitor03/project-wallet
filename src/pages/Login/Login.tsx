@@ -53,14 +53,14 @@ function Login() {
           data-testid="password-input"
           onChange={ (e) => handleChange(e) }
         />
-        { password.length > 7 && <p>A senha precisa ter ao menos 8 caracteres.</p> }
+        { password.length < 8 && <p>A senha precisa ter ao menos 8 caracteres.</p> }
         <button
           className={
-            password.length > 7 ? styles.btnSubmitEnabled : styles.btnSubmitDisabled
+            password.length < 8 ? styles.btnSubmitDisabled : styles.btnSubmitEnabled
           }
           disabled={
             !email.match(/^[\w+.]+@\w+\.\w{2,}(?:\.\w{2})?$/)
-            || password.length < 6
+            || password.length < 8
           }
         >
           Entrar
